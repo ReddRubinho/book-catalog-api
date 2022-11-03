@@ -5,5 +5,5 @@ import reactor.core.publisher.Flux
 
 interface BookDataSource {
 
-  fun getBanks(): Flux<BookDto>
+  fun getBooks(): Collection<BookDto>
 }
