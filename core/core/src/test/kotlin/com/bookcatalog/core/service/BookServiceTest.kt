@@ -7,10 +7,11 @@ import io.mockk.verify
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-internal class BookServiceTest {
+internal class BookServiceTest constructor(
+  private val dataSource: BookDataSource = mockk(relaxed = true),
+  private val bookService: BookService = BookService(dataSource)){
 
-  private val dataSource: BookDataSource = mockk(relaxed = true)
-  private val bookService = BookService(dataSource)
+
 
   @Test
   fun `should call its data source to retrieve books`() {

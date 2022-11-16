@@ -7,6 +7,40 @@ import org.springframework.stereotype.Repository
 @Repository
 class MockBookDataSource : BookDataSource {
 
-  val books = listOf(BookDto(1, 1 ,"a", "b", "c", 1, "d", "e"))
+  val books = mutableListOf(
+    BookDto(1, 1, "a", "b", "c", 1, "d", "e"),
+    BookDto(2, 2, "a", "a", "c", 1, "d", "e"),
+    BookDto(3, 3, "a", "a", "c", 1, "d", "e"),
+    BookDto(4, 4, "b", "b", "c", 1, "d", "e")
+  )
+
   override fun getBooks(): Collection<BookDto> = books
+  override fun getBook(isbn: String): BookDto = books.firstOrNull { it.isbn == isbn.toInt() }
+    ?: throw NoSuchElementException("Could not find a book with isbn $isbn")
+
+  override fun postBook(book: BookDto): BookDto {
+    if (books.any { it.isbn == book.isbn }) {
+      throw IllegalArgumentException("Book with isbn ${book.isbn} already exists")
+    } else {
+      books.add(book)
+    }
+    return book
+  }
+
+  override fun patchBook(book: BookDto, isbn: Int): BookDto {
+    val currentBook = books.firstOrNull { it.isbn == isbn }
+      ?: throw NoSuchElementException("Could not find a book with isbn ${book.isbn}")
+
+    books.remove(currentBook)
+    books.add(book)
+
+    return book
+  }
+
+  override fun deleteBook(isbn: Int) {
+    val deletedBook: BookDto = books.firstOrNull() { it.isbn == isbn }
+      ?: throw NoSuchElementException("Could not find a book with isbn ${isbn}")
+
+    books.remove(deletedBook)
+  }
 }

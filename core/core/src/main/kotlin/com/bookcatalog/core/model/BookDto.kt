@@ -1,12 +1,16 @@
 package com.bookcatalog.core.model
 
-data class BookDto(
-  val id: Int,
-  val isbn: Int,
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class BookDto constructor(
+
+  @JsonProperty("")
+  val id: Number,
+  val isbn: Number,
   val title: String,
   val authors: String,
   val publisher: String,
-  val pages: Int,
+  val pages: Number,
   val plot: String,
   val bookImage: String
 )
