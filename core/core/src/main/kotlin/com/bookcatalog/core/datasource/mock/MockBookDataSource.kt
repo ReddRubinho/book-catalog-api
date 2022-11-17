@@ -4,7 +4,7 @@ import com.bookcatalog.core.datasource.BookDataSource
 import com.bookcatalog.core.model.BookDto
 import org.springframework.stereotype.Repository
 
-@Repository
+@Repository("book_mock")
 class MockBookDataSource : BookDataSource {
 
   val books = mutableListOf(

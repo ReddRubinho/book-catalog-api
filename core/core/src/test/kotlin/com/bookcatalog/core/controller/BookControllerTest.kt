@@ -34,7 +34,7 @@ internal class BookControllerTest @Autowired constructor(
         .andExpect {
           status { isOk() }
           content { contentType(MediaType.APPLICATION_JSON) }
-          jsonPath("$[0].id") { value(1) }
+          jsonPath("$[0].book_id") { value(1) }
         }
       //when
 
