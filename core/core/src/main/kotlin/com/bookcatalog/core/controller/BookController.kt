@@ -22,7 +22,7 @@ class BookController constructor(private val bookService: BookService) {
   fun getBooks(): Collection<BookDto> = bookService.getBooks()
 
   @GetMapping("/{isbn}")
-  fun getBook(@PathVariable isbn : String) = bookService.getBook(isbn)
+  fun getBook(@PathVariable isbn : Int) = bookService.getBook(isbn)
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)

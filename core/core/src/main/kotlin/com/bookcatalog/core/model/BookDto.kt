@@ -2,6 +2,7 @@ package com.bookcatalog.core.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@Entity
 data class BookDto constructor(
 
   @JsonProperty("book_id")
