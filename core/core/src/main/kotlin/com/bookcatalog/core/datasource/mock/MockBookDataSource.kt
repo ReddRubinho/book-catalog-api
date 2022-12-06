@@ -5,7 +5,7 @@ import com.bookcatalog.core.model.BookDto
 import org.springframework.stereotype.Repository
 
 @Repository("book_mock")
-class MockBookDataSource : BookDataSource {
+abstract class MockBookDataSource : BookDataSource {
 
   val books = mutableListOf(
     BookDto(1, 1, "a", "b", "c", 1, "d", "e"),
@@ -14,11 +14,11 @@ class MockBookDataSource : BookDataSource {
     BookDto(4, 4, "b", "b", "c", 1, "d", "e")
   )
 
-  override fun getBooks(): Collection<BookDto> = books
-  override fun getBook(isbn: String): BookDto = books.firstOrNull { it.isbn == isbn.toInt() }
+  fun getBooks(): Collection<BookDto> = books
+  fun getBook(isbn: String): BookDto = books.firstOrNull { it.isbn == isbn.toInt() }
     ?: throw NoSuchElementException("Could not find a book with isbn $isbn")
 
-  override fun postBook(book: BookDto): BookDto {
+  fun postBook(book: BookDto): BookDto {
     if (books.any { it.isbn == book.isbn }) {
       throw IllegalArgumentException("Book with isbn ${book.isbn} already exists")
     } else {
@@ -27,7 +27,7 @@ class MockBookDataSource : BookDataSource {
     return book
   }
 
-  override fun patchBook(book: BookDto, isbn: Int): BookDto {
+  fun patchBook(book: BookDto, isbn: Int): BookDto {
     val currentBook = books.firstOrNull { it.isbn == isbn }
       ?: throw NoSuchElementException("Could not find a book with isbn ${book.isbn}")
 
@@ -37,10 +37,14 @@ class MockBookDataSource : BookDataSource {
     return book
   }
 
-  override fun deleteBook(isbn: Int) {
+  fun deleteBook(isbn: Int) {
     val deletedBook: BookDto = books.firstOrNull() { it.isbn == isbn }
       ?: throw NoSuchElementException("Could not find a book with isbn ${isbn}")
 
     books.remove(deletedBook)
   }
+
+  override fun findByIsbn(isbn: Int): BookDto = books.firstOrNull { it.isbn == isbn.toInt() }
+    ?: throw NoSuchElementException("Could not find a book with isbn $isbn")
+
 }

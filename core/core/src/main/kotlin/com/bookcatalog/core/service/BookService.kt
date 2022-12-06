@@ -4,16 +4,27 @@ import com.bookcatalog.core.datasource.BookDataSource
 import com.bookcatalog.core.model.BookDto
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
-class BookService(@Qualifier("book_jpa") private val dataSource: BookDataSource){
-  fun getBooks() : Collection<BookDto> = dataSource.findAll()
+@Transactional
+class BookService(@Qualifier("book_jpa") private val dataSource: BookDataSource) {
 
-  fun getBook(isbn: Int) : BookDto = dataSource.findByIsbn(isbn)
+    fun init() {
+        if (dataSource.findAll().isEmpty()) {
+            val book: BookDto
+            book::isbn = 999
+        }
 
-  fun postBook(book: BookDto): BookDto  = dataSource.save(book)
+    }
 
-  fun patchBook(book: BookDto, isbn: Int): BookDto = dataSource.save(book)
+    fun getBooks(): Collection<BookDto> = dataSource.findAll()
 
-  fun deleteBook(isbn: Int) = dataSource.deleteByIsbn(isbn)
+    fun getBook(isbn: Int): BookDto = dataSource.findByIsbn(isbn)
+
+    fun postBook(book: BookDto): BookDto = dataSource.save(book)
+
+    fun patchBook(book: BookDto, isbn: Int): BookDto = dataSource.save(book)
+
+    fun deleteBook(isbn: Int) = dataSource.deleteByIsbn(isbn)
 }
