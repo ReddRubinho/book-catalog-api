@@ -25,7 +25,7 @@ internal class MockBookDataSourceTest {
     val books = mockDataSource.getBooks()
     //then
 
-    assertThat(books).allMatch {it.authors.isNotBlank() && it.id != 0 }
+    assertThat(books).allMatch {it.authors.isNotBlank() && it.bookId != 0 }
   }
 
 }

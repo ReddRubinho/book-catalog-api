@@ -19,17 +19,11 @@ class BookCatalogConfiguration(@Autowired private val env: Environment) {
 
     @Bean
     fun dataSource(): DataSource = DriverManagerDataSource(
-        Objects.requireNonNull(env.getProperty("spring.datasource.url")),
-        Objects.requireNonNull(env.getProperty("spring.datasource.username")),
-        Objects.requireNonNull(env.getProperty("spring.datasource.password"))
+        env.getRequiredProperty("spring.datasource.url"),
+        env.getRequiredProperty("spring.datasource.username"),
+        env.getRequiredProperty("spring.datasource.password")
     )
 
     @Bean
-    fun jdbcTemplate(dataSource: DataSource) = NamedParameterJdbcTemplate(dataSource)
-
-    @Bean
     fun restTemplate(builder: RestTemplateBuilder): RestTemplate = builder.build()
-
-    @Bean(name = ["entityManagerFactory"])
-    fun sessionFactory(): LocalSessionFactoryBean = LocalSessionFactoryBean()
 }

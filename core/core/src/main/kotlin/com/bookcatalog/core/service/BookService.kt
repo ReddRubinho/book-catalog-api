@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class BookService(@Qualifier("book_jpa") private val dataSource: BookDataSource) {
 
-    fun init() {
-        if (dataSource.findAll().isEmpty()) {
-            val book: BookDto
-            book::isbn = 999
-        }
-
-    }
+//    fun init() {
+//        if (dataSource.findAll().isEmpty()) {
+//            val book: BookDto
+//            book
+//        }
+//
+//    }
 
     fun getBooks(): Collection<BookDto> = dataSource.findAll()
 

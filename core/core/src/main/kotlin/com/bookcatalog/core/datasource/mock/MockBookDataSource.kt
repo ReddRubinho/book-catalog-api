@@ -3,15 +3,16 @@ package com.bookcatalog.core.datasource.mock
 import com.bookcatalog.core.datasource.BookDataSource
 import com.bookcatalog.core.model.BookDto
 import org.springframework.stereotype.Repository
+import java.sql.Date
 
 @Repository("book_mock")
 abstract class MockBookDataSource : BookDataSource {
 
   val books = mutableListOf(
-    BookDto(1, 1, "a", "b", "c", 1, "d", "e"),
-    BookDto(2, 2, "a", "a", "c", 1, "d", "e"),
-    BookDto(3, 3, "a", "a", "c", 1, "d", "e"),
-    BookDto(4, 4, "b", "b", "c", 1, "d", "e")
+    BookDto(1, "a", "b", "c", Date.valueOf("2000-12-05"), 1, "d", "e"),
+    BookDto(2, "a", "a", "c", Date.valueOf("2000-12-05"), 1, "d", "e"),
+    BookDto(3, "a", "a", "c", Date.valueOf("2000-12-05"), 1, "d", "e"),
+    BookDto(4, "b", "b", "c", Date.valueOf("2000-12-05"), 1, "d", "e")
   )
 
   fun getBooks(): Collection<BookDto> = books
