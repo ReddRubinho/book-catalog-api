@@ -1,6 +1,6 @@
 package com.bookcatalog.core.controller
 
-import com.bookcatalog.core.model.BookDto
+import com.bookcatalog.core.model.book.BookDto
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested

@@ -1,15 +1,16 @@
 package com.bookcatalog.core.service
 
-import com.bookcatalog.core.datasource.BookDataSource
-import io.mockk.every
+import com.bookcatalog.core.datasource.book.BookDataSource
+import com.bookcatalog.core.service.book.BookService
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class BookServiceTest constructor(
-  private val dataSource: BookDataSource = mockk(relaxed = true),
-  private val bookService: BookService = BookService(dataSource)){
+    private val dataSource: BookDataSource = mockk(relaxed = true),
+    private val bookService: BookService = BookService(dataSource)
+){
 
 
 

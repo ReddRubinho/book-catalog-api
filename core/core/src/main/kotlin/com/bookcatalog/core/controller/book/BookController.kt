@@ -1,7 +1,7 @@
-package com.bookcatalog.core.controller
+package com.bookcatalog.core.controller.book
 
-import com.bookcatalog.core.model.BookDto
-import com.bookcatalog.core.service.BookService
+import com.bookcatalog.core.model.book.BookDto
+import com.bookcatalog.core.service.book.BookService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -26,7 +26,7 @@ class BookController constructor(@Autowired private val bookService: BookService
 
     @GetMapping("/{isbn}")
     @ResponseStatus(HttpStatus.OK)
-    fun getBook(@PathVariable isbn: Int) = bookService.getBook(isbn)
+    fun getBook(@PathVariable isbn: Int): BookDto = bookService.getBook(isbn)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

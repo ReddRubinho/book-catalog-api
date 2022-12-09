@@ -1,13 +1,13 @@
-package com.bookcatalog.core.service
+package com.bookcatalog.core.service.book
 
-import com.bookcatalog.core.datasource.BookDataSource
-import com.bookcatalog.core.model.BookDto
+import com.bookcatalog.core.datasource.book.BookDataSource
+import com.bookcatalog.core.model.book.BookDto
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-@Transactional
+//@Transactional
 class BookService(@Qualifier("book_jpa") private val dataSource: BookDataSource) {
 
 //    fun init() {

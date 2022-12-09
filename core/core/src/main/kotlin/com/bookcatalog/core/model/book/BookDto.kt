@@ -1,4 +1,4 @@
-package com.bookcatalog.core.model
+package com.bookcatalog.core.model.book
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.Hibernate
@@ -12,7 +12,7 @@ data class BookDto(
     @Id
     @JsonProperty("isbn")
     @Column(name = "isbn")
-    var isbn: Int = 0,
+    val isbn: Int = 0,
 
     @JsonProperty("title")
     @Column(name = "title")
@@ -42,19 +42,4 @@ data class BookDto(
     @JsonProperty("book_image")
     @Column(name = "book_image")
     val bookImage: String = ""
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as BookDto
-
-        return  isbn == other.isbn
-    }
-
-    override fun hashCode(): Int = Objects.hash(isbn);
-
-    @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(isbn = $isbn , title = $title , authors = $authors , publisher = $publisher , pages = $pages , plot = $plot , bookImage = $bookImage )"
-    }
-}
+)

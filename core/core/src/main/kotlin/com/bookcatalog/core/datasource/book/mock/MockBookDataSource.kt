@@ -1,7 +1,7 @@
-package com.bookcatalog.core.datasource.mock
+package com.bookcatalog.core.datasource.book.mock
 
-import com.bookcatalog.core.datasource.BookDataSource
-import com.bookcatalog.core.model.BookDto
+import com.bookcatalog.core.datasource.book.BookDataSource
+import com.bookcatalog.core.model.book.BookDto
 import org.springframework.stereotype.Repository
 import java.sql.Date
 
