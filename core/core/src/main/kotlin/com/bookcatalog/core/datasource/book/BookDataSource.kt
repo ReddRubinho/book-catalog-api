@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository
 @Repository("book_jpa")
 interface BookDataSource: JpaRepository<BookDto, Int> {
 
-  fun findByIsbn(isbn: Int): BookDto
+  fun findByIsbn(isbn: String): BookDto
 
-  fun deleteByIsbn(isbn: Int): Any
+  fun deleteByIsbn(isbn: String): Any
+
+  fun findByTitle(title: String): Collection<BookDto>
 }

@@ -12,7 +12,7 @@ data class BookDto(
     @Id
     @JsonProperty("isbn")
     @Column(name = "isbn")
-    val isbn: Int = 0,
+    val isbn: String = "",
 
     @JsonProperty("title")
     @Column(name = "title")
@@ -39,7 +39,7 @@ data class BookDto(
     @Column(name = "plot")
     val plot: String = "",
 
-    @JsonProperty("book_image")
+    @JsonProperty("bookImage")
     @Column(name = "book_image")
     val bookImage: String = ""
 )

@@ -4,7 +4,6 @@ import com.bookcatalog.core.datasource.book.BookDataSource
 import com.bookcatalog.core.model.book.BookDto
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 //@Transactional
@@ -20,11 +19,15 @@ class BookService(@Qualifier("book_jpa") private val dataSource: BookDataSource)
 
     fun getBooks(): Collection<BookDto> = dataSource.findAll()
 
-    fun getBook(isbn: Int): BookDto = dataSource.findByIsbn(isbn)
+    fun getBooksByTitle(title: String): Collection<BookDto> = dataSource.findByTitle(title)
+
+    fun getBook(isbn: String): BookDto = dataSource.findByIsbn(isbn)
 
     fun postBook(book: BookDto): BookDto = dataSource.save(book)
 
-    fun patchBook(book: BookDto, isbn: Int): BookDto = dataSource.save(book)
+    fun patchBook(book: BookDto, isbn: String): BookDto = dataSource.save(book)
 
-    fun deleteBook(isbn: Int) = dataSource.deleteByIsbn(isbn)
+    fun deleteBook(isbn: String) = dataSource.deleteByIsbn(isbn)
+
+    fun deleteAll() = dataSource.deleteAll()
 }

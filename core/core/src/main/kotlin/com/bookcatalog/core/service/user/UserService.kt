@@ -12,7 +12,7 @@ class UserService(@Qualifier("user_jpa") private val dataSource: UserDataSource)
 
     fun getUsers(): Collection<UserDto> = dataSource.findAll()
 
-    fun getUser(username: String): Optional<UserDto> = dataSource.findById(username)
+    fun getUser(username: String): UserDto = dataSource.findByUsername(username)
 
     fun postUser(user: UserDto): UserDto = dataSource.save(user)
 

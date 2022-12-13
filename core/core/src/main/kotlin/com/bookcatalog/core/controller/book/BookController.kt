@@ -24,18 +24,26 @@ class BookController constructor(@Autowired private val bookService: BookService
     @ResponseStatus(HttpStatus.OK)
     fun getBooks(): Collection<BookDto> = bookService.getBooks()
 
+    @GetMapping("/title/{title}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getBooksByTitle(@PathVariable title: String): Collection<BookDto> = bookService.getBooksByTitle(title)
+
     @GetMapping("/{isbn}")
     @ResponseStatus(HttpStatus.OK)
-    fun getBook(@PathVariable isbn: Int): BookDto = bookService.getBook(isbn)
+    fun getBook(@PathVariable isbn: String): BookDto = bookService.getBook(isbn)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun postBook(@RequestBody book: BookDto): BookDto = bookService.postBook(book)
 
     @PatchMapping("/{isbn}")
-    fun updateBook(@RequestBody book: BookDto, @PathVariable isbn: Int): BookDto = bookService.patchBook(book, isbn)
+    fun updateBook(@RequestBody book: BookDto, @PathVariable isbn: String): BookDto = bookService.patchBook(book, isbn)
 
     @DeleteMapping("/{isbn}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteBook(@PathVariable isbn: Int) = bookService.deleteBook(isbn)
+    fun deleteBook(@PathVariable isbn: String) = bookService.deleteBook(isbn)
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteAll() = bookService.deleteAll()
 }

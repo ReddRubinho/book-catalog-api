@@ -27,18 +27,18 @@ class UserController constructor(@Autowired private val userService: UserService
     @ResponseStatus(HttpStatus.OK)
     fun getUsers(): Collection<UserDto> = userService.getUsers()
 
-    @GetMapping("/username")
+    @GetMapping("/{username}")
     @ResponseStatus(HttpStatus.OK)
-    fun getUser(@PathVariable username: String): Optional<UserDto> = userService.getUser(username)
+    fun getUser(@PathVariable username: String): UserDto = userService.getUser(username)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun postUser(@RequestBody user: UserDto): UserDto = userService.postUser(user)
 
-    @PatchMapping("/username")
+    @PatchMapping("/{username}")
     fun updateUser(@RequestBody user: UserDto, @PathVariable username: String): UserDto = userService.patchUser(user, username)
 
-    @DeleteMapping("/username")
+    @DeleteMapping("/{username}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable username: String) = userService.deleteUser(username)
 }
